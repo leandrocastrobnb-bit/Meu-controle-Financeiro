@@ -48,7 +48,12 @@ svg.i{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke
 .alert{display:flex;align-items:center;gap:10px;border-radius:16px;padding:12px 14px;margin-bottom:14px;font-weight:600;font-size:14px;cursor:pointer;border:1px solid}
 .alert.er{background:rgba(224,68,58,.1);border-color:rgba(224,68,58,.35);color:var(--er)}.alert.wa{background:rgba(229,138,0,.1);border-color:rgba(229,138,0,.35);color:var(--wa)}.alert span{flex:1}
 .dn{display:flex;align-items:center;gap:14px}.lg{flex:1;min-width:0}
-.lr{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:13px;cursor:pointer}.lr i{width:10px;height:10px;border-radius:50%;flex:none}.lr span{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.lr em{color:var(--mu);font-style:normal;font-size:11px;width:38px;text-align:right}
+.lr{padding:8px 0;font-size:13px;cursor:pointer;border-bottom:1px solid var(--ln)}.lr:last-child{border-bottom:0;padding-bottom:0}
+.lr-top{display:flex;align-items:center;gap:8px;min-width:0}.lr-dot{width:10px;height:10px;border-radius:50%;flex:none}
+.lr-top span{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lr-top b{font-size:12px;white-space:nowrap}.lr-top em{color:var(--mu);font-style:normal;font-size:11px;min-width:34px;text-align:right}
+.lr-track{display:block;height:4px;border-radius:4px;background:var(--sub);margin:7px 0 0 18px;overflow:hidden}
+.lr-track i{display:block;height:100%;border-radius:inherit}
 .tt{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}.tt b{font-size:24px;font-weight:800}
 .it{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--ln)}.it:last-child{border:0;padding-bottom:0}
 .dot{width:38px;height:38px;border-radius:12px;flex:none;display:grid;place-items:center;color:#fff;font-weight:700;font-size:14px}
@@ -206,7 +211,9 @@ body{background:var(--bg)}
  .kc-s{font-size:11px;overflow-wrap:anywhere}
  .kc-f{gap:5px;padding:8px 10px;font-size:10.5px}
  .bg{font-size:10px;padding:3px 7px}
- .dn{gap:10px}
+ .dn{flex-direction:column;align-items:stretch;gap:8px}
+ .dn>svg{align-self:center;width:144px;height:144px}
+ .lr{padding:10px 0}
  .emerg-values{grid-template-columns:repeat(2,minmax(0,1fr))}
  .emerg-values b{font-size:clamp(12px,4vw,15px);overflow-wrap:anywhere}
 }
@@ -416,10 +423,9 @@ home(){
   `${emergencyCard()}
   <div class="sech" style="margin-top:14px">Indicadores consolidados</div><div class="secs">Realizado em ${mes} de ${y}. Toque em um indicador para ver os detalhes.</div>
   <div class="kg">${cards.join("")}</div>
-  <div class="sech">Análise do mês</div><div class="secs">Gastos por categoria e evolução dos últimos 6 meses.</div>
-  <div class="g2"><div class="card"><h2>Gastos por categoria<small>${es.length} ${es.length===1?"conta":"contas"}</small></h2>
-   ${by.length?`<div class="dn">${donut(by,tot)}<div class="lg">${by.map(([c,v])=>`<div class="lr" data-a="gocat" data-v="${esc(c)}"><i style="background:${colorOf(c)}"></i><span>${esc(c)}</span><b>${brl(v)}</b><em>${(v/tot*100).toFixed(0)}%</em></div>`).join("")}</div></div>`:'<div class="emp">Nenhum gasto neste mês.<br>Toque em + para adicionar.</div>'}</div>
-  <div class="card"><h2>Renda x gastos<small>últimos 6 meses</small></h2>${bars()}</div></div>
+  <div class="sech">Análise do mês</div><div class="secs">Distribuição dos gastos por categoria.</div>
+  <div class="card"><h2>Gastos por categoria<small>${es.length} ${es.length===1?"conta":"contas"}</small></h2>
+   ${by.length?`<div class="dn">${donut(by,tot)}<div class="lg">${by.map(([c,v])=>`<div class="lr" data-a="gocat" data-v="${esc(c)}"><div class="lr-top"><i class="lr-dot" style="background:${colorOf(c)}"></i><span>${esc(c)}</span><b>${brl(v)}</b><em>${(v/tot*100).toFixed(0)}%</em></div><span class="lr-track"><i style="width:${v/tot*100}%;background:${colorOf(c)}"></i></span></div>`).join("")}</div></div>`:'<div class="emp">Nenhum gasto neste mês.<br>Toque em + para adicionar.</div>'}</div>
   <div class="sech">Próximos vencimentos</div><div class="secs">Contas vencidas e que vencem em até 7 dias.</div>
   <div class="card">${al.length?al.slice(0,6).map(item).join(""):'<div class="emp">Nenhuma conta vencida ou vencendo nos próximos 7 dias.</div>'}</div>`+"</div>";
 },
