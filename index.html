@@ -185,6 +185,37 @@ body{background:var(--bg)}
  .ph h1{font-size:24px}
  #toast{bottom:30px}
 }
+@media (max-width:480px){
+ #app{width:100%;padding:14px 14px calc(112px + env(safe-area-inset-bottom,0px))}
+ .mp{margin-right:-14px;margin-left:-14px;padding-right:14px;padding-left:14px}
+ .hd{gap:9px}
+ .hi b{font-size:clamp(16px,4.8vw,19px)}
+ .card{padding:16px;margin-bottom:12px;border-radius:18px}
+ .card h2{gap:8px;flex-wrap:wrap}
+ .hero{padding:18px;border-radius:22px;margin-bottom:12px}
+ .hero .big{font-size:clamp(22px,7vw,32px);overflow-wrap:anywhere}
+ .hrow{gap:8px}
+ .hrow>div{padding:9px 10px}
+ .hrow b{font-size:clamp(14px,4vw,17px);overflow-wrap:anywhere}
+ .kg{gap:8px}
+ .kc-h{gap:6px;padding:10px 10px 8px}
+ .kc-h span{font-size:10px}
+ .kc-h i{width:26px;height:26px}
+ .kc-b{padding:10px}
+ .kc-v{font-size:clamp(14px,4.4vw,18px);white-space:normal;overflow-wrap:anywhere}
+ .kc-s{font-size:11px;overflow-wrap:anywhere}
+ .kc-f{gap:5px;padding:8px 10px;font-size:10.5px}
+ .bg{font-size:10px;padding:3px 7px}
+ .dn{gap:10px}
+ .emerg-values{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .emerg-values b{font-size:clamp(12px,4vw,15px);overflow-wrap:anywhere}
+}
+@media (max-width:360px){
+ #app{padding-right:12px;padding-left:12px}
+ .mp{margin-right:-12px;margin-left:-12px;padding-right:12px;padding-left:12px}
+ .kg{grid-template-columns:minmax(0,1fr)}
+ .kc-v{font-size:18px}
+}
 body.lg{padding-left:0}
 </style>
 </head>
